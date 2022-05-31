@@ -4,7 +4,7 @@ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearm
 sudo apt-get install apt-transport-https unzip
 echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
 sudo apt-get update && sudo apt-get install elasticsearch kibana
-sudo /usr/share/elasticsearch/bin/elasticsearch-certutil ca --pem --out /tmp/ca.zip
+sudo /usr/share/elasticsearch/bin/elasticsearch-certutil ca --ca-dn "cn=ELK CA" --pem --out /tmp/ca.zip
 sudo unzip /tmp/ca.zip -d /tmp
 #Cert setup
 echo 'Please insert if you want 1.) IP address 2.) DNS entry, 3.) Both for Kibana and elasticsearch certificates'
