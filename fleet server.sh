@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "Please ensure you have set the default settings for Elasticsearch in the web UI first"
 sudo apt install elastic-agent -y
-sudo /usr/share/elasticsearch/bin/elasticsearch-certutil ca --pem -s --out /tmp/fleet_ca.zip
+sudo /usr/share/elasticsearch/bin/elasticsearch-certutil ca --ca-dn "cn=Fleet CA" --pem -s --out /tmp/fleet_ca.zip
 sudo mkdir /usr/share/elasticsearch/certs/fleet -p
 sudo unzip /tmp/fleet_ca.zip -d /usr/share/elasticsearch/certs/fleet
 echo 'Please insert if you want 1.) IP address 2.) DNS entry, 3.) Both for fleet server certificates'
