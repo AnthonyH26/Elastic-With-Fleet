@@ -199,9 +199,9 @@ sudo mv /tmp/ca /usr/share/elasticsearch/certs
 sudo mv /tmp/elasticsearch /usr/share/elasticsearch/certs
 sudo mv /tmp/kibana /usr/share/elasticsearch/certs
 sudo rm /tmp/*.zip
-sudo rm -rf ca
-sudo rm -rf elasticsearch
-sudo rm -rf kibana
-sudo rm password.txt
-sudo rm dns.txt
-sudo rm instances.yml
+sudo rm -rf /tmp/ca
+sudo rm -rf /tmp/elasticsearch
+sudo rm -rf /tmp/kibana
+sudo rm /tmp/password.txt
+sudo rm /tmp/dns.txt
+sudo rm /tmp/instances.yml
