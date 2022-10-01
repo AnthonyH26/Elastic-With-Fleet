@@ -4,7 +4,7 @@ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearm
 sudo apt-get install apt-transport-https unzip
 echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
 sudo apt-get update && sudo apt-get install elasticsearch kibana
-sudo /usr/share/elasticsearch/bin/elasticsearch-certutil ca --ca-dn "cn=ELK CA" --pem --out /tmp/ca.zip
+sudo /usr/share/elasticsearch/bin/elasticsearch-certutil ca --pem --out /tmp/ca.zip
 sudo unzip /tmp/ca.zip -d /tmp
 #Cert setup
 echo 'Please insert if you want 1.) IP address 2.) DNS entry, 3.) Both for Kibana and elasticsearch certificates'
@@ -114,6 +114,8 @@ sudo /usr/share/elasticsearch/bin/elasticsearch-certutil cert --ca-cert /tmp/ca/
 sudo unzip /tmp/bundled.zip -d /tmp
 sudo mkdir /etc/elasticsearch/certs/ca -p
 sudo cp /tmp/ca/ca.crt /etc/elasticsearch/certs/ca
+sudo cp /etc/elasticsearch/certs/ca/ca.crt /usr/local/share/ca-certificates/elastic-ca.crt
+sudo update-ca-certificates
 sudo cp /tmp/elasticsearch/elasticsearch.crt /etc/elasticsearch/certs
 sudo cp /tmp/elasticsearch/elasticsearch.key /etc/elasticsearch/certs
 sudo chown -R elasticsearch: /etc/elasticsearch/certs
@@ -199,9 +201,9 @@ sudo mv /tmp/ca /usr/share/elasticsearch/certs
 sudo mv /tmp/elasticsearch /usr/share/elasticsearch/certs
 sudo mv /tmp/kibana /usr/share/elasticsearch/certs
 sudo rm /tmp/*.zip
-sudo rm -rf /tmp/ca
-sudo rm -rf /tmp/elasticsearch
-sudo rm -rf /tmp/kibana
-sudo rm /tmp/password.txt
-sudo rm /tmp/dns.txt
-sudo rm /tmp/instances.yml
+sudo rm -rf ca
+sudo rm -rf elasticsearch
+sudo rm -rf kibana
+sudo rm password.txt
+sudo rm dns.txt
+sudo rm instances.yml
